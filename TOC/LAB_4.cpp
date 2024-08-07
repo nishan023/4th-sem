@@ -1,3 +1,4 @@
+// LAB4: DFA accepting the string over {a,b} such that each string does not end with ab.
 #include <iostream>
 #include <string>
 using namespace std;

@@ -1,3 +1,4 @@
+// LAB6: Design an NFA that accepts strings starting with "10" or not over {0,1}.
 #include <iostream>
 #include <vector>
 #include <unordered_set>

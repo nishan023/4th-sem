@@ -1,3 +1,5 @@
+// LAB5: Design an NFA that displays if the string contains the substring "101" or not over {0,1}.
+#include <iostream>
 #include <iostream>
 #include <string>
 #include <unordered_set>

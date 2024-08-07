@@ -1,3 +1,4 @@
+// LAB7: C++ code that generates strings representing properly balanced parentheses using a context-free grammar
 #include <iostream>
 #include <string>
 using namespace std;

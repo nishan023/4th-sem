@@ -1,3 +1,4 @@
+// LAB3: Write a program for DFA for the language of string over {0,1} in which each string ends with 11 (using C, C++ and else).
 #include <iostream>
 #include <string>
 using namespace std;
