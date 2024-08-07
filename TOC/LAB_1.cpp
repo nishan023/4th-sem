@@ -1,56 +1,39 @@
 // LAB1: Program to find prefixes, suffixes, and substrings from a given string (Using C, C++ and else)
 #include <iostream>
-#include <string.h>
+#include <string>
 #include <set>
 using namespace std;
 
 int main()
 {
-    char str[100], prefix[100], suffix[100], substring[100];
-    int i, j, k, l, m, n, o, p;
-
+    string str;
     cout << "Enter a string: ";
     cin >> str;
-    l = strlen(str);
 
+    int len = str.length();
+
+    // Print prefixes
     cout << "Prefix: ";
-    for (i = 0; i < l; i++)
-    {
-        for (j = 0; j <= i; j++)
-        {
-            prefix[j] = str[j];
-        }
-        prefix[j] = '\0';
-        cout << prefix << " ";
-    }
+    for (int i = 1; i <= len; ++i)
+        cout << str.substr(0, i) << " ";
     cout << endl;
 
+    // Print suffixes
     cout << "Suffix: ";
-    for (k = 0; k < l; k++)
-    {
-        for (m = k; m < l; m++)
-        {
-            suffix[m - k] = str[m];
-        }
-        suffix[m - k] = '\0';
-        cout << suffix << " ";
-    }
+    for (int i = 0; i < len; ++i)
+        cout << str.substr(i) << " ";
     cout << endl;
 
+    // Print unique substrings
     cout << "Substring: ";
-    set<string> unique_substrings; // Use a set to keep track of unique substrings
-    for (n = 0; n < l; n++)
+    set<string> unique_substrings;
+    for (int i = 0; i < len; ++i)
     {
-        for (o = n; o < l; o++)
+        for (int j = i + 1; j <= len; ++j)
         {
-            // Extract substring using string.substr() function
-            string sub = string(str).substr(n, o - n + 1); // (start, length) of substring
-            // Check if substring has already been generated
-            if (unique_substrings.find(sub) == unique_substrings.end())
-            {
-                unique_substrings.insert(sub);
+            string sub = str.substr(i, j - i);
+            if (unique_substrings.insert(sub).second)
                 cout << sub << " ";
-            }
         }
     }
     cout << endl;
