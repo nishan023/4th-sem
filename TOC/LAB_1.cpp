@@ -6,8 +6,8 @@ using namespace std;
 
 int main()
 {
-    char str[100], prefix[100], suffix[100], substring[100];
-    int i, j, k, l, m, n, o, p;
+    char str[100], prefix[100], suffix[100];
+    int i, j, k, l, m, n, o;
 
     cout << "Enter a string: ";
     cin >> str;
