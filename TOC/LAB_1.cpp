@@ -6,7 +6,9 @@ using namespace std;
 
 int main()
 {
-    string str;
+    char str[100], prefix[100], suffix[100];
+    int i, j, k, l, m, n, o;
+
     cout << "Enter a string: ";
     cin >> str;
 
