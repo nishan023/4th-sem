@@ -2,7 +2,6 @@
 #include <iostream>
 #include <stack>
 #include <string>
-
 using namespace std;
 
 bool isLanguageAccepted(const string &input)
@@ -18,21 +17,16 @@ bool isLanguageAccepted(const string &input)
         else if (c == 'b')
         {
             if (stack.empty())
-            {
-                return false; // More 'b's than 'a's
-            }
-            else
-            {
-                stack.pop();
-            }
+                return false;
+            stack.pop();
         }
         else
         {
-            return false; // Invalid input character
+            return false; // Invalid character
         }
     }
 
-    return stack.empty(); // Stack should be empty at the end
+    return stack.empty(); // Valid if stack is empty
 }
 
 int main()
@@ -41,14 +35,7 @@ int main()
     cout << "Enter a string: ";
     cin >> input;
 
-    if (isLanguageAccepted(input))
-    {
-        cout << "Accepted: The string is in the language L = {a^n b^n | n ≥ 0}\n";
-    }
-    else
-    {
-        cout << "Rejected: The string is not in the language L = {a^n b^n | n ≥ 0}\n";
-    }
+    cout << (isLanguageAccepted(input) ? "Accepted: The string is in the language L = {a^n b^n | n ≥ 1}\n" : "Rejected: The string is not in the language L = {a^n b^n | n ≥ 1}\n");
 
     return 0;
 }

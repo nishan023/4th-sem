@@ -1,28 +1,23 @@
 // LAB6: Design an NFA that accepts strings starting with "10" or not over {0,1}.
 #include <iostream>
 #include <vector>
-#include <set>
-
+#include <unordered_set>
 using namespace std;
 
-// Define the NFA as a set of states and transitions
-vector<vector<pair<char, int>>> transitions = {
-    {{'1', 1}},          // Transitions from state 0: move to state 1 on '1'
-    {{'0', 2}},          // Transitions from state 1: move to state 2 on '0'
-    {{'0', 2}, {'1', 2}} // Transitions from state 2: stay in state 2 on '0' or '1'
-};
-
-// Define a function to simulate the NFA on a given string
+// Simulate the NFA
 bool simulate_nfa(const string &input)
 {
-    // Set of current states
-    set<int> current_states = {0};
+    vector<vector<pair<char, int>>> transitions = {
+        {{'1', 1}},          // From state 0: move to state 1 on '1'
+        {{'0', 2}},          // From state 1: move to state 2 on '0'
+        {{'0', 2}, {'1', 2}} // From state 2: stay in state 2 on '0' or '1'
+    };
 
-    // Loop through each character in the input string
+    unordered_set<int> current_states = {0};
+
     for (char c : input)
     {
-        // Set of next states
-        set<int> next_states;
+        unordered_set<int> next_states;
         for (int state : current_states)
         {
             for (const auto &transition : transitions[state])
@@ -33,11 +28,10 @@ bool simulate_nfa(const string &input)
                 }
             }
         }
-        // Update the current states to the next states
         current_states = next_states;
     }
-    // Check if state 2 (the accepting state) is in the set of current states
-    return current_states.find(2) != current_states.end();
+
+    return current_states.count(2) > 0; // Accepting state is 2
 }
 
 int main()
@@ -46,14 +40,7 @@ int main()
     cout << "Enter the string over {0,1}: ";
     cin >> input;
 
-    if (simulate_nfa(input))
-    {
-        cout << "The string starts with 10.";
-    }
-    else
-    {
-        cout << "The string does not start with 10.";
-    }
+    cout << (simulate_nfa(input) ? "The string starts with 10." : "The string does not start with 10.") << endl;
 
     return 0;
 }

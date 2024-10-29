@@ -1,7 +1,6 @@
 // LAB9: Design a Turing Machine (TM) that accepts L = {a^n b^n | n ≥ 1}.
 #include <iostream>
 #include <string>
-
 using namespace std;
 
 // Define states of the Turing Machine
@@ -16,18 +15,12 @@ enum State
 
 class TuringMachine
 {
-private:
     string tape;
     int head;
     State state;
 
 public:
-    TuringMachine(string input)
-    {
-        tape = input;
-        head = 0;
-        state = START;
-    }
+    TuringMachine(string input) : tape(input + 'B'), head(0), state(START) {}
 
     void transition()
     {
@@ -42,10 +35,6 @@ public:
                     moveRight();
                     state = SCAN_A;
                 }
-                else if (tape[head] == 'B')
-                {
-                    state = REJECT;
-                }
                 else
                 {
                     state = REJECT;
@@ -56,10 +45,6 @@ public:
                 if (tape[head] == 'a')
                 {
                     moveRight();
-                }
-                else if (tape[head] == 'B')
-                {
-                    state = REJECT;
                 }
                 else if (tape[head] == 'b')
                 {
@@ -89,24 +74,15 @@ public:
                 break;
 
             case REJECT:
-                return;
-
             case ACCEPT:
                 return;
             }
         }
     }
 
-    void printResult()
+    void printResult() const
     {
-        if (state == ACCEPT)
-        {
-            cout << "String accepted." << endl;
-        }
-        else
-        {
-            cout << "String rejected." << endl;
-        }
+        cout << (state == ACCEPT ? "String accepted." : "String rejected.") << endl;
     }
 
 private:
@@ -125,9 +101,6 @@ int main()
     string input;
     cout << "Enter input string: ";
     cin >> input;
-
-    // Append a blank symbol to the end of the input string
-    input += 'B';
 
     TuringMachine tm(input);
     tm.transition();

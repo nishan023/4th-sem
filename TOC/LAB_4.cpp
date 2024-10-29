@@ -5,44 +5,29 @@ using namespace std;
 
 int main()
 {
-    string str;     // string to be checked
-    char state = 0; // initial state (q0)
+    string str;
+    int state = 0;
 
     cout << "Enter the string: ";
     cin >> str;
 
-    // loop to check each character of the string for the DFA
-    for (int i = 0; i < str.length(); i++)
+    // Check each character of the string and transition between states
+    for (char ch : str)
     {
-        // check if the string is over {a,b} or not
-        if (str[i] != 'a' && str[i] != 'b')
+        if (ch != 'a' && ch != 'b')
         {
             cout << "String not accepted.\nPlease enter a string over {a,b}" << endl;
             return 0;
         }
-
-        // DFA transition check
-        if (state == 0 && str[i] == 'a')
-            state = 1;
-        else if (state == 0 && str[i] == 'b')
-            state = 0;
-        else if (state == 1 && str[i] == 'a')
-            state = 1;
-        else if (state == 1 && str[i] == 'b')
-            state = 2;
-        else if (state == 2 && str[i] == 'a')
-            state = 1;
-        else if (state == 2 && str[i] == 'b')
-            state = 0;
+        state = (state == 0 && ch == 'a') ? 1 : (state == 0 && ch == 'b') ? 0
+                                            : (state == 1 && ch == 'a')   ? 1
+                                            : (state == 1 && ch == 'b')   ? 2
+                                            : (state == 2 && ch == 'a')   ? 1
+                                                                          : 0;
     }
 
-    // check if the string is accepted or not,
-    // i.e. if the final state is 0 or 1 then string is accepted
-    // else string is not accepted
-    if (state == 0 || state == 1)
-        cout << "String accepted";
-    else
-        cout << "String not accepted";
+    // Determine if the string is accepted based on the final state
+    cout << (state == 0 || state == 1 ? "String accepted" : "String not accepted") << endl;
 
     return 0;
 }
