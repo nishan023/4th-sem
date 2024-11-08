@@ -1,17 +1,14 @@
-import numpy as np
-from keras.models import Sequential
-from keras.layers import Dense
+#machine Learning/Naive Bayes Classifier
+from sklearn.naive_bayes import GaussianNB
+from sklearn.model_selection import train_test_split
+from sklearn import datasets
 
-# Input and output data for AND gate
-X = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
-y = np.array([[0], [0], [0], [1]])
+# Load dataset
+data = datasets.load_iris()
+X_train, X_test, y_train, y_test = train_test_split(data.data, data.target, test_size=0.3)
 
-# Build the model
-model = Sequential()
-model.add(Dense(1, input_dim=2, activation='sigmoid'))
-model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+# traineing Naive Bayes
+model = GaussianNB()
+model.fit(X_train, y_train)
 
-# Train the model
-model.fit(X, y, epochs=500, verbose=0)
-
-print(model.predict(X))
+print(f"Accuracy: {model.score(X_test, y_test)}")
